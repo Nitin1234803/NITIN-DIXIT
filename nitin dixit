@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct itemDetails
+{
+    string name;
+    int price, gst, amount;
+    itemDetails()
+    {
+        name = "";
+        price = 0, gst = 0, amount = 0;
+    }
+};
+
+double getGSTAmount(itemDetails& item)
+{
+    double ans = (item.price * item.amount);
+    ans = (ans * item.gst)/100.0;
+    return ans;
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    vector<itemDetails> arr(n);
+    map<double, vector<string>> mp;
+    double totalAmount = 0;
+    for (int i = 0; i < n; i++)
+    {
+        arr[i] = itemDetails();
+        cin >> arr[i].name >> arr[i].price >> arr[i].gst >> arr[i].amount;
+
+        double gstAmount = getGSTAmount(arr[i]);
+        mp[gstAmount].push_back(arr[i].name);
+
+        totalAmount += (gstAmount + (1.0 * arr[i].amount * arr[i].price));
+    }
+
+    auto it = (mp.rbegin());
+    for (auto& curr : it->second)
+        cout << curr <<" ";
+    cout << endl;
+    cout << totalAmount << endl;
+
+    return 0;
+}
