@@ -1,0 +1,109 @@
+from tkinter import *
+
+def click(event):
+    global scvalue
+    text=event.widget.cget("text")
+    print(text)
+    if text=="=":
+        if scvalue.get().isdigit():
+            value=int(scvalue.get())
+        else:
+            try:
+
+                value=eval(scvalue.get())
+            except Exception as e:
+                scvalue.set("error")
+                screen.update()
+                
+        scvalue.set(value)
+        screen.update()
+
+    elif text=="c":
+        scvalue.set("")
+        screen.update()
+
+    else:
+        scvalue.set(scvalue.get() + text)
+        screen.update()
+        
+
+root = Tk()
+root.geometry("644x150")
+scvalue=StringVar()
+scvalue.set("")
+
+root.title("calculator(using GUI)")
+
+screen=Entry(root, textvar=scvalue, font="lucida 24 bold")
+screen.pack(fill=X, ipadx=8, ipady=10, padx=10)
+
+f= Frame(root, bg="grey")
+
+b= Button(f, text="9", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+b= Button(f, text="8", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+b= Button(f, text="7", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+b= Button(f, text="6", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+b= Button(f, text="5", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+b= Button(f, text="4", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+b= Button(f, text="3", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+b= Button(f, text="2", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+b= Button(f, text="1", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+
+b= Button(f, text="0", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+b= Button(f, text="-", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+b= Button(f, text="*", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+b= Button(f, text="/", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+b= Button(f, text="%", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+b= Button(f, text="c", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+b= Button(f, text="=", font="lucida 20 bold")
+b.pack(side=LEFT)
+b.bind("<Button-1>", click)
+
+f.pack()
+
+root.mainloop()
