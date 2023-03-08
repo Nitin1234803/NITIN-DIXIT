@@ -1,0 +1,36 @@
+import seaborn as sns
+import pandas as pd
+import numpy as np
+
+db=pd.read_csv(r'C:/Users/nitin/PycharmProjects/pythonProject1/diabetes.csv')
+db.head()
+
+x=db.iloc[:,0:8]
+y=db.iloc[:,-1]
+
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train , y_test= train_test_split(x,y,random_state=40, test_size=0.25)
+
+from sklearn.linear_model import LogisticRegression
+classifier=LogisticRegression()
+
+from sklearn.model_selection import GridSearchCV 
+parameter={'penalty':['l1','l2'],'C':[1,2,3,4,5,6,10,20,30,40,50],'max_iter':[100,200,300]}
+
+classifier_regressor=GridSearchCV(classifier,param_grid=parameter,scoring='accuracy',cv=5)
+
+classifier_regressor.fit(x_train,y_train)
+
+print(classifier_regressor.best_params_)
+
+print(classifier_regressor.best_score_)
+
+y_pred=classifier_regressor.predict(x_test)
+
+from sklearn.metrics import accuracy_score,classification_report
+
+score=accuracy_score(y_pred,y_test)
+print(score)
+
+print(classification_report(y_pred,y_test))
+
