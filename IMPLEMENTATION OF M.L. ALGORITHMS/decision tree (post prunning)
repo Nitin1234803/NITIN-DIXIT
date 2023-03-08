@@ -1,0 +1,35 @@
+import matplotlib.pyplot as plt 
+%matplotlib inline
+import pandas as pd
+import seaborn as sns
+
+db=pd.read_csv(r'C:/Users/nitin/PycharmProjects/pythonProject1/diabetes.csv')
+db.head()
+
+x=db.iloc[:,0:8]
+y=db.iloc[:,-1]
+
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train , y_test= train_test_split(x,y,random_state=42, test_size=0.33)
+
+from sklearn.tree import DecisionTreeClassifier
+
+#postprunning technique
+dt=DecisionTreeClassifier(max_depth=2)
+
+dt.fit(x_train,y_train)
+
+from sklearn import tree
+plt.figure(figsize=(15,10))
+tree.plot_tree(dt,filled=True)
+
+y_pred=dt.predict(x_test)
+
+y_pred
+
+from sklearn.metrics import accuracy_score,classification_report
+
+score=accuracy_score(y_pred,y_test)
+print(score)
+
+print(classification_report(y_pred,y_test))
