@@ -1,0 +1,23 @@
+.homePage {
+    background: "red";
+    position: absolute;
+    top: 30%;
+    left: 25%;
+}
+.loginTitle {
+    position: relative;
+    left: -10%;
+}
+.pywebio {
+    background-image: url("https://www.hdwallpapers.in/download/transparent_image_of_blue_wavy_lines_hd_transparent_image-HD.jpg");
+      background-color: #cccccc; /* Used if the image is unavailable */
+        height: 500px; /* You must set a specified height */
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; 
+}
+.dashboardCss {
+    position: relative;
+    left: 25%;
+    top: 20% !important;
+}
